@@ -13,142 +13,127 @@ import java.util.Scanner;
 
 public class PhoneBookApp {
 
-	public static void pList() throws IOException {
-		int count = 0;
-		// in
-		Reader fr = new FileReader("C:\\javaStudy\\강의자료\\01.java_programing\\미니프로젝트\\PhoneDB_원본.txt");
-		BufferedReader br = new BufferedReader(fr);
+	public static void pList(List<PhoneBook> person) {
 
-		// ※ 주의 - 쓰기를 사용하면 원본 파일이 다 없어짐
-		Writer out = new FileWriter("C:\\javaStudy\\강의자료\\01.java_programing\\미니프로젝트\\PhoneDB_원본_insert.txt");
-		BufferedWriter bw = new BufferedWriter(out);
 
-		while (true) {
-			// 파일을 1줄씩 읽는다.
-			String str = br.readLine();
-
-			// null 이면 반복문 끝.
-			if (str == null) {
-				break;
-			}
-			bw.write(str);
-			bw.newLine();
-
-			System.out.println((count + 1) + ".\t" + str);
-			count++;
+			for (int i = 0; i < person.size(); i++) {
+				System.out.println(person.get(i));
 		}
 
-		System.out.println();
-
-		br.close();
-		bw.close();
 	}
 
-	public static void pUpdate(String info) throws IOException {
-		// in
-		Reader fr = new FileReader("C:\\javaStudy\\강의자료\\01.java_programing\\미니프로젝트\\PhoneDB_원본_insert.txt");
-		BufferedReader br = new BufferedReader(fr);
+	public static void wText(List<PhoneBook> person) {
+		try {
+			// ※ 주의 - 쓰기를 사용하면 원본 파일이 다 없어짐
+			Writer out = new FileWriter("D:\\javaStudy\\01.java_programming\\미니프로젝트\\PhoneDB_원본_insert.txt");
+			BufferedWriter bw = new BufferedWriter(out);
 
-		// ※ 주의 - 쓰기를 사용하면 원본 파일이 다 없어짐
-		Writer out = new FileWriter("C:\\javaStudy\\강의자료\\01.java_programing\\미니프로젝트\\PhoneDB_원본.txt");
-		BufferedWriter bw = new BufferedWriter(out);
-
-		while (true) {
-			// 파일을 1줄씩 읽는다.
-			String str = br.readLine();
-
-			// null 이면 반복문 끝.
-			if (str == null) {
-				break;
+			for (int i = 0; i < person.size(); i++) {
+				PhoneBook write = (PhoneBook) person.get(i);
+				bw.write(write.getName()+",");
+				bw.write(write.getHp()+",");
+				bw.write(write.getCompany());
+				bw.newLine();
 			}
-			bw.write(str);
-			bw.newLine();
-
+			bw.close();
+		} catch (Exception e) {
+			System.out.println(e);
 		}
-		bw.write(info);
 
-		System.out.println();
-
-		br.close();
-		bw.close();
 	}
 
-	public static void pRemove(int dnum) throws IOException {
-		// in
-		Reader fr = new FileReader("C:\\javaStudy\\강의자료\\01.java_programing\\미니프로젝트\\PhoneDB_원본_insert.txt");
-		BufferedReader br = new BufferedReader(fr);
+	public static void rText(List<PhoneBook> person) {
+		try {
+			Reader fr = new FileReader("D:\\javaStudy\\01.java_programming\\미니프로젝트\\PhoneDB_원본.txt");
+			BufferedReader br = new BufferedReader(fr);
 
-		// ※ 주의 - 쓰기를 사용하면 원본 파일이 다 없어짐
-		Writer out = new FileWriter("C:\\javaStudy\\강의자료\\01.java_programing\\미니프로젝트\\PhoneDB_원본.txt");
-		BufferedWriter bw = new BufferedWriter(out);
-		
-		
-		String str;
+			while (true) {
+				String a = br.readLine();
+				if (a == null) {
+					break;
+				}
+				String[] str = a.split(",");
 
-		
-		List pList = new ArrayList();
-		
-		while (true) {
-			// 파일을 1줄씩 읽는다.
-			str = br.readLine();
-
-			// null 이면 반복문 끝.
-			if (str == null) {
-				break;
+				person.add(new PhoneBook(str[0], str[1], str[2]));
 			}
-			bw.write(str);
-			bw.newLine();
+			br.close();
 
-			pList.add(str);
+		} catch (Exception e) {
+			System.out.println(e);
 		}
-		pList.remove(dnum - 1);
+
+	}
+
+	public static void pUpdate(Scanner sc, List<PhoneBook> person) {
 		
-		
-		for (int j = 0; j < pList.size(); j++) {
-			String a = (String) pList.get(j);
+		try {
+			System.out.print(">이름: ");
+			String name = sc.nextLine();
+			System.out.print(">휴대전화: ");
+			String hp = sc.nextLine();
+			System.out.print(">회사전화: ");
+			String company = sc.nextLine();
 			
-			bw.write(a);
-			bw.newLine();
+			person.add(new PhoneBook(name, hp, company));
 			
+		} catch (Exception e) {
 		}
 		
-		System.out.println();
-
-		br.close();
-		bw.close();
+		
 	}
 
-	
-	public static void main(String[] args) throws IOException {
+	public static void pRemove(Scanner sc, List<PhoneBook> person) {
 
-		// in
-		Reader fr = new FileReader("C:\\javaStudy\\강의자료\\01.java_programing\\미니프로젝트\\PhoneDB_원본.txt");
-		BufferedReader br = new BufferedReader(fr);
+		try {
+			int dnum = sc.nextInt();
+			
+			person.remove(dnum - 1);
+			
+			System.out.println();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
 
-		// ※ 주의 - 쓰기를 사용하면 원본 파일이 다 없어짐
-		Writer out = new FileWriter("C:\\javaStudy\\강의자료\\01.java_programing\\미니프로젝트\\PhoneDB_원본_insert.txt");
-		BufferedWriter bw = new BufferedWriter(out);
+	}
+
+	public static void pSearch(Scanner sc, List<PhoneBook> person) {
+		
+	}
+
+	public static void main(String[] args) {
+
+		List<PhoneBook> person = new ArrayList<PhoneBook>();
 
 		System.out.println("*******************************************");
 		System.out.println("*            전화번호 관리 프로그램            *");
 		System.out.println("*******************************************");
+		System.out.println();
 
 		Scanner sc = new Scanner(System.in);
 		boolean tf = true;
-
+		int count = 0;
+		
 		while (tf) {
 			System.out.println("1.리스트  2.등록  3.삭제  4.검색  5.종료");
+			System.out.println("------------------------------------");
 			System.out.print(">메뉴번호: ");
+			System.out.println();
 
-			int num = sc.nextInt();
+			int no = sc.nextInt();
 
-			switch (num) {
+			switch (no) {
 
 			case 1:
 				System.out.println("<1.리스트>");
-
-				pList();
-
+				if(count == 0) {
+					rText(person);
+					pList(person);
+					wText(person);
+					count++;
+				}else {
+					pList(person);
+				}
 				break;
 
 			case 2:
@@ -156,18 +141,11 @@ public class PhoneBookApp {
 
 				System.out.println("<2.등록>");
 
-				System.out.print(">이름: ");
-				String name = sc.nextLine();
-				System.out.print(">휴대전화: ");
-				String hp = sc.nextLine();
-				System.out.print(">회사전화: ");
-				String company = sc.nextLine();
-
-				String info = name + "," + hp + "," + company;
-
-				pUpdate(info);
+				pUpdate(sc, person);
+				wText(person);
 
 				System.out.println("[등록되었습니다.]");
+				System.out.println();
 
 				break;
 			case 3:
@@ -175,14 +153,14 @@ public class PhoneBookApp {
 
 				System.out.println("<3.삭제>");
 				System.out.print(">번호 : ");
-
-				int dnum = sc.nextInt();
-
-				pRemove(dnum);
-
+				pRemove(sc, person);
+				wText(person);
+				
 				break;
 			case 4:
-
+				System.out.println("<4.검색>");
+				System.out.println();
+				pSearch(sc, person);
 				break;
 
 			case 5:
@@ -194,14 +172,13 @@ public class PhoneBookApp {
 
 			default:
 				System.out.println("[다시 입력해주세요.]");
+				System.out.println();
 				break;
 			}
 
 		}
 
 		sc.close();
-		bw.close();
-		br.close();
 	}
 
 }
