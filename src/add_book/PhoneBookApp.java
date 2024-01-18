@@ -15,9 +15,10 @@ public class PhoneBookApp {
 
 	public static void pList(List<PhoneBook> person) {
 
-
 			for (int i = 0; i < person.size(); i++) {
-				System.out.println(person.get(i));
+				person.get(i).setNum(i+1);
+				person.get(i).showInfo();
+				//System.out.println((i + 1) + "." + person.get(i));
 		}
 
 	}
@@ -30,6 +31,7 @@ public class PhoneBookApp {
 
 			for (int i = 0; i < person.size(); i++) {
 				PhoneBook write = (PhoneBook) person.get(i);
+				//person.get(i).setNum(i+1);
 				bw.write(write.getName()+",");
 				bw.write(write.getHp()+",");
 				bw.write(write.getCompany());
@@ -99,6 +101,16 @@ public class PhoneBookApp {
 
 	public static void pSearch(Scanner sc, List<PhoneBook> person) {
 		
+		String name = sc.nextLine();
+		
+		for (int i = 0; i < person.size(); i++) {
+			String pname = person.get(i).getName();
+			
+			if(pname.contains(name)) {
+				System.out.println(pname);
+			}
+			
+		}
 	}
 
 	public static void main(String[] args) {
@@ -113,15 +125,13 @@ public class PhoneBookApp {
 		Scanner sc = new Scanner(System.in);
 		boolean tf = true;
 		int count = 0;
-		
 		while (tf) {
 			System.out.println("1.리스트  2.등록  3.삭제  4.검색  5.종료");
 			System.out.println("------------------------------------");
 			System.out.print(">메뉴번호: ");
-			System.out.println();
-
+			
 			int no = sc.nextInt();
-
+			
 			switch (no) {
 
 			case 1:
@@ -134,6 +144,7 @@ public class PhoneBookApp {
 				}else {
 					pList(person);
 				}
+				System.out.println();
 				break;
 
 			case 2:
@@ -146,7 +157,7 @@ public class PhoneBookApp {
 
 				System.out.println("[등록되었습니다.]");
 				System.out.println();
-
+				
 				break;
 			case 3:
 				sc.nextLine();
@@ -155,16 +166,18 @@ public class PhoneBookApp {
 				System.out.print(">번호 : ");
 				pRemove(sc, person);
 				wText(person);
-				
 				break;
 			case 4:
+				sc.nextLine();
 				System.out.println("<4.검색>");
-				System.out.println();
+				System.out.print(">이름:");
 				pSearch(sc, person);
+				System.out.println();
 				break;
 
 			case 5:
 				tf = false;
+				System.out.println();
 				System.out.println("****************");
 				System.out.println("*   감사합니다   *");
 				System.out.println("****************");

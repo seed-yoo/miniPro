@@ -1,7 +1,7 @@
 package add_book;
 
 public class PhoneBook {
-
+	
 	private int num;
 	private String name;
 	private String hp;
@@ -14,21 +14,23 @@ public class PhoneBook {
 		this.company = company;
 	}
 	
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
-	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	public int getNum() {
+		return num;
+	}
+	
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getHp() {
 		return hp;
 	}
+
 	public void setHp(String hp) {
 		this.hp = hp;
 	}
@@ -41,7 +43,11 @@ public class PhoneBook {
 	
 	@Override
 	public String toString() {
-		return "PhoneBook [num=" + num + ", name=" + name + ", hp=" + hp + ", company=" + company + "]";
+		return "PhoneBook [name=" + name + ", hp=" + hp + ", company=" + company + "]";
+	}
+	
+	public void showInfo() {
+		System.out.println(num + ".\t" + name + "\t" + hp + "\t" + company);
 	}
 	
 	
