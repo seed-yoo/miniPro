@@ -26,7 +26,7 @@ public class PhoneBookApp {
 	public static void wText(List<PhoneBook> person) {
 		try {
 			// ※ 주의 - 쓰기를 사용하면 원본 파일이 다 없어짐
-			Writer out = new FileWriter("D:\\javaStudy\\01.java_programming\\미니프로젝트\\PhoneDB_원본_insert.txt");
+			Writer out = new FileWriter("C:\\javaStudy\\강의자료\\01.java_programing\\미니프로젝트\\PhoneDB_원본_insert.txt");
 			BufferedWriter bw = new BufferedWriter(out);
 
 			for (int i = 0; i < person.size(); i++) {
@@ -46,7 +46,7 @@ public class PhoneBookApp {
 
 	public static void rText(List<PhoneBook> person) {
 		try {
-			Reader fr = new FileReader("D:\\javaStudy\\01.java_programming\\미니프로젝트\\PhoneDB_원본.txt");
+			Reader fr = new FileReader("C:\\javaStudy\\강의자료\\01.java_programing\\미니프로젝트\\PhoneDB_원본.txt");
 			BufferedReader br = new BufferedReader(fr);
 
 			while (true) {
